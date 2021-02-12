@@ -1,0 +1,2 @@
+elastix_path = /mnt/c/Users/herny/Software/elastix-4.9.0-win64/elastix.exe
+transformix_path = /mnt/c/Users/herny/Software/elastix-4.9.0-win64/transformix.exe
