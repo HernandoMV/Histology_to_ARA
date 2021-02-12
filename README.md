@@ -6,11 +6,12 @@ Registration of a brain slice to the Allen Reference Atlas
 
 
 ## Steps
-1. In MoBIE, load the ARA (Use Mobie (see above) in expert mode)
-  1.1. Select plane corresponding to histology
-  1.2. Log transformation and copy to .txt file
-  1.3. Create screenshot WITH DEFAULT PARAMETERS. For 25um/pixel atlas this is 22.619um/px
-  1.4. Save text file and screenshot with the same names (ending in '.txt' and  '_ARA.txt' as the histology in the same folder)
-2. Register the histology to screenshot (python folder_register_ARA_to_histology.py 'path_to_000_Slices_for_ARA_registration')
-3. Transform (2D to 2D) points of interest using transformix (TODO)
-4. Transform (2D to 3D) points to ARA (e.g. python register_2D_to_3D.py 135 178 25 /mnt/c/Users/herny/Desktop/Reg_test/mobie_position.txt)
+### 1. In MoBIE, load the ARA (Use Mobie (see above) in expert mode)
+####  1.1. Select plane corresponding to histology
+####  1.2. Log transformation and copy to .txt file
+####  1.3. Create screenshot WITH DEFAULT PARAMETERS. For 25um/pixel atlas this is 22.619um/px
+####  1.4. Save text file and screenshot with the same names (ending in '.txt' and  '_ARA.txt' as the histology in the same folder)
+### 2. Register the histology to screenshot (e.g. python folder_register_ARA_to_histology.py 'path_to_000_Slices_for_ARA_registration')
+### 3. Transform (2D to 3D) points to ARA (e.g. python points_transformation 'path_to_dataframe')
+This dataframe is generated with Inmuno_4channels_analysis.ipynb in CellProfiler_AnalysisPipelines - https://github.com/HernandoMV/CellProfiler_AnalysisPipelines
+
