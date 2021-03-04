@@ -118,9 +118,10 @@ def make_core_name_from_series(series_data):
     return name
 
 
-def get_prereg_coordinates(df):
+def get_prereg_coordinates(df, data_path):
     '''
     df is a panda dataframe with specific columns
+    datapath is the path to the images
     outputs: general coordinates of cell in downsampled image
     '''
     assert isinstance(df, pd.DataFrame), 'Data not pandas dataframe'
@@ -136,7 +137,7 @@ def get_prereg_coordinates(df):
         # get the indexes of the cells belonging to that roi
         sub_idx = df[df.manual_roi_name == roiname].index.values
         # get the path to the file with roi information
-        mr_file = get_manual_rois_file_path(df.loc[sub_idx])
+        mr_file = get_manual_rois_file_path(df.loc[sub_idx], data_path)
         # generate a dataframe from that file
         roi_df = create_dataframe_from_roi_file(mr_file)
 
@@ -185,12 +186,12 @@ def create_dataframe_from_roi_file(filepath):
     return(rois_df)
 
 
-def get_manual_rois_file_path(df):
+def get_manual_rois_file_path(df, data_path):
     '''
     generates the path to the file with the rois information
     '''
     rois_file_path = 'ROIs/000_ManualROIs_info/'
-    manual_roi_path = os.path.join(df.attrs['datapath'],
+    manual_roi_path = os.path.join(data_path,
                                    rois_file_path,
                                    make_core_name_from_series(df.iloc[0]))
     manual_roi_path = '_'.join([manual_roi_path,

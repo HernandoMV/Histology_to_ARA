@@ -26,11 +26,14 @@ def points_to_ARA(path_to_dataframe, resolution=25):
     # read input from the notebook
     df = pd.read_pickle(path_to_dataframe)
 
+    # get the path to the images
+    data_path = df.attrs['datapath']
+
     # get the registration image core name for every row
     df['reg_im_corename'] = df.apply(gf.make_reg_core_name_from_series, axis=1)
 
     # get the positions of the cells in the downsample image (the one used for registration)
-    df_tr = gf.get_prereg_coordinates(df)
+    df_tr = gf.get_prereg_coordinates(df, data_path)
 
     # create two columns to hold data
     df_tr['x_coord_post'] = np.nan
