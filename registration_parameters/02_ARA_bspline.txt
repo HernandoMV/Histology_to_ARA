@@ -1,11 +1,5 @@
 //Bspline Transformation - updated May 2012
 
-//ImageTypes
-//(FixedInternalImagePixelType "float")
-//(FixedImageDimension 3)
-//(MovingInternalImagePixelType "float")
-//(MovingImageDimension 3)
-
 //Components
 (Registration "MultiResolutionRegistration")
 (FixedImagePyramid "FixedSmoothingImagePyramid")
@@ -75,3 +69,4 @@
 
 //SP: Param_alpha in each resolution level. a_k = a/(A+k+1)^alpha
 (SP_alpha 0.6 )
+

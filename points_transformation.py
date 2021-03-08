@@ -25,6 +25,7 @@ def points_to_ARA(path_to_dataframe, resolution=25):
 
     # read input from the notebook
     df = pd.read_pickle(path_to_dataframe)
+    print('Transforming points in {}'.format(os.path.basename(path_to_dataframe)))
 
     # get the path to the images
     data_path = df.attrs['datapath']
@@ -35,7 +36,7 @@ def points_to_ARA(path_to_dataframe, resolution=25):
     # get the positions of the cells in the downsample image (the one used for registration)
     df_tr = gf.get_prereg_coordinates(df, data_path)
 
-    # create two columns to hold data
+    # create three columns to hold data
     df_tr['x_coord_post'] = np.nan
     df_tr['y_coord_post'] = np.nan
     df_tr['z_coord_post'] = np.nan
@@ -44,6 +45,7 @@ def points_to_ARA(path_to_dataframe, resolution=25):
     ind_images = df_tr.reg_im_corename.unique()
     # iterate over each manually draw roi
     for imname in ind_images:
+        print('Registering cells on {}'.format(imname))
         # get the indexes of the cells belonging to that image
         sub_idx = df_tr[df_tr.reg_im_corename == imname].index.values
         # get path to transformation file

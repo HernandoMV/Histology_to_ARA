@@ -2,12 +2,6 @@
 
 // Description: affine, MI, ASGD
 
-//ImageTypes
-//(FixedInternalImagePixelType "float")
-//(FixedImageDimension 3)
-//(MovingInternalImagePixelType "float")
-//(MovingImageDimension 3)
-
 //Components
 (Registration "MultiResolutionRegistration")
 (FixedImagePyramid "FixedSmoothingImagePyramid")

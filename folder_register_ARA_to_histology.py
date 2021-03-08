@@ -27,18 +27,31 @@ def folder_register():
     print('Performing registrations in folder {}'.format(folder_path))
 
     # Parse the files
-    ARA, histology, _ = split_files_in_registration_folder(folder_path)
+    _, histology, _ = split_files_in_registration_folder(folder_path)
 
     # Perform registrations
-    for i in range(len(ARA)):
-        ara_file = os.path.basename(ARA[i])
+    for i in range(len(histology)):
+        # get and define names
         hist_file = os.path.basename(histology[i])
+        file_base_name = hist_file.split('.tif')[0]
+        outdir = file_base_name + '_reg_output'
+        outdir_path = os.path.join(folder_path, outdir)
+        ara_file = file_base_name + '_ARA.tif'
+
+        # check that the ARA file has been created
+        if not os.path.isfile(os.path.join(folder_path, ara_file)):
+            print('Please generate the virtual slice for {}'.format(file_base_name))
+            continue
+
+        # check if the registration has already been run
+        if os.path.exists(os.path.join(outdir_path, 'result.1.tiff')):
+            print('Registration already run for {}, not modifying'.format(file_base_name))
+            continue
+
         print('Registering {} to {}'.format(ara_file,
                                             hist_file))
 
         # Create output directory
-        outdir = hist_file.split('.tif')[0] + '_reg_output'
-        outdir_path = os.path.join(folder_path, outdir)
         if not os.path.exists(outdir_path):
             os.makedirs(outdir_path)
 
@@ -47,16 +60,16 @@ def folder_register():
         shutil.copy(os.path.join(parameters_path, affine_name), './')
         shutil.copy(os.path.join(parameters_path, bspline_name), './')
         shutil.copy(histology[i], './')
-        shutil.copy(ARA[i], './')
+        shutil.copy(os.path.join(folder_path, ara_file), './')
 
         # Run registration
-
-        regist_command = '{0} -f {1} -m {2} -p {3} -p {4} -out {5}'.format(elastix_path,
-                                                                           hist_file,
-                                                                           ara_file,
-                                                                           affine_name,
-                                                                           bspline_name,
-                                                                           './')
+        regist_command = '{0} -f {1} -m {2} -p {3} -p {4} -out {5} > /dev/null'.format(
+            elastix_path,
+            hist_file,
+            ara_file,
+            affine_name,
+            bspline_name,
+            './')
 
         os.system(regist_command)
 

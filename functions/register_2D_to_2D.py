@@ -45,10 +45,11 @@ def register_2D_to_2D_transformix(x_coordinates, y_coordinates, transformation_f
     # run transformix
     # Change directory and run local, otherwise elastix is shit
     os.chdir(working_dir)
-    transform_command = '{0} -def {1} -out {2} -tp {3}'.format(transformix_path,
-                                                               tr_input_file_name,
-                                                               '.',
-                                                               transformation_file_name)
+    transform_command = '{0} -def {1} -out {2} -tp {3} > /dev/null'.format(
+        transformix_path,
+        tr_input_file_name,
+        '.',
+        transformation_file_name)
 
     os.system(transform_command)
 
