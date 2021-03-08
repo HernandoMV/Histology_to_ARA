@@ -24,7 +24,7 @@ def folder_register():
 
     # Get the directory as the first imput parameter
     folder_path = sys.argv[1]
-    print('Performing registrations in folder {}'.format(folder_path))
+    print('Performing registrations in folder {}'.format(os.path.basename(folder_path)))
 
     # Parse the files
     _, histology, _ = split_files_in_registration_folder(folder_path)
