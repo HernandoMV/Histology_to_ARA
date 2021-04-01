@@ -3,6 +3,7 @@ Registration of a brain slice to the Allen Reference Atlas
 
 ## Dependencies
 - mobie beta (expert usage version) from https://github.com/mobie/mobie-viewer-fiji
+- elastix
 
 
 ## Steps
