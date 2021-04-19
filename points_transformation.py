@@ -84,7 +84,7 @@ if __name__ == '__main__':
     # check input
     if len(sys.argv) not in [2, 3]:
         sys.exit('Incorrect number of arguments, please run like this:\
-            python points_transformation path_to_dataframe optional:resolution_of_ARA')
+            python points_transformation.py path_to_dataframe optional:resolution_of_ARA')
     # catch input
     inpath = sys.argv[1]
     if len(sys.argv) == 3:
