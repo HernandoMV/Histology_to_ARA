@@ -192,6 +192,7 @@ def get_manual_rois_file_path(df, data_path):
     '''
     rois_file_path = 'ROIs/000_ManualROIs_info/'
     manual_roi_path = os.path.join(data_path,
+                                   df.AnimalID.unique()[0],
                                    rois_file_path,
                                    make_core_name_from_series(df.iloc[0]))
     manual_roi_path = '_'.join([manual_roi_path,

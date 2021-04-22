@@ -49,7 +49,9 @@ def points_to_ARA(path_to_dataframe, resolution=25):
         # get the indexes of the cells belonging to that image
         sub_idx = df_tr[df_tr.reg_im_corename == imname].index.values
         # get path to transformation file
-        trans_file_path = gf.get_transformation_file_path(df_tr.attrs['datapath'], imname)
+        animal_data_path = os.path.join(df_tr.attrs['datapath'],
+                                        df_tr.loc[sub_idx].AnimalID.unique()[0])
+        trans_file_path = gf.get_transformation_file_path(animal_data_path, imname)
         # get the xs and ys values
         xs_2d = list(df_tr.loc[sub_idx].x_coord_pre)
         ys_2d = list(df_tr.loc[sub_idx].y_coord_pre)
@@ -61,7 +63,7 @@ def points_to_ARA(path_to_dataframe, resolution=25):
             xs_tr_2d = [i[0] for i in tr_2d]
             ys_tr_2d = [i[1] for i in tr_2d]
             # get the mobie position file
-            mobie_file_path = gf.get_mobie_file_path(df_tr.attrs['datapath'], imname)
+            mobie_file_path = gf.get_mobie_file_path(animal_data_path, imname)
             # apply 2D to 3D transformation
             tr_3d = register_2D_to_3D_affine(xs_tr_2d, ys_tr_2d, resolution, mobie_file_path)
             # update columns
